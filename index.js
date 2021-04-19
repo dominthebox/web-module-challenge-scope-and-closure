@@ -33,12 +33,13 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   
   2. Which of the two uses a closure? How can you tell?
 
-  counter1 code utilizes a closure, because the nested function is calling to the function it's nested in.
+  counter1 code utilizes a closure, because the nested function is calling to the function it's nested in. 
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?
      
-     
+     counter1 code would be more ideal if you did not want the count variable to be changed or reassigned, counter2 code would be more ideal if you knew later down in your code you might need to reassign the count value.
+
 */
 
 // counter1 code
@@ -69,7 +70,7 @@ NOTE: This will be a callback function for the tasks below
 */
 
 function inning(){
-    return Math.floor(Math.random() * Math.floor(2) +1)
+    return Math.floor(Math.random()*3)
 }
 
 console.log(inning());
@@ -88,24 +89,29 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(inningcb, number){
+function finalScore(inningCB, inningsPlayed){
+  let homeScore = 0;
+  let awayScore = 0;
+  for (let i = 0; i < inningsPlayed; i++){
+    homeScore = homeScore + inningCB();
+    awayScore = awayScore + inningCB();
+  }
   return {
-    Home = inning() * number,
-    Away = inning() * number
+    Home: homeScore,
+    Away: awayScore
   }
 }
-
-console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 7));
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(callback) {
+function getInningScore(inningCB) {
   return{
-    Home = callback(),
-    Away = callback()
+    Home: inningCB(),
+    Away: inningCB()
   }
 }
 
@@ -117,7 +123,7 @@ Use the scoreboard function below to do the following:
   2. Receive the callback function `inning` from Task 2
   3. Receive a number of innings to be played
   4. Return an array where each of it's index values equals a string stating the
-  Home and Away team's scores for each inning.  Not the cummulative score.
+  Home and Away team's scores for each inning.  Not the cumulative score.
   5. If there's a tie at the end of the innings, add this message containing the score to the end of the array:  "This game will require extra innings: Away 12 - Home 12"  (see tie example below)
      If there isn't a tie, add this message to the end of the array: "Final Score: Away 13 - Home 11"  (see no tie example below)
   
