@@ -170,8 +170,10 @@ function scoreboard(getInningScoreCB, inningCB, inningNumber) {
   }
   if (home === away){
     scores.push(`This game will require extra innings: ${away} - ${home}`)
+  }else {
+    scores.push(`Final score: ${away} - ${home}`);
   }
-  return 
+  return scores
 }
 
 console.log(scoreboard(getInningScore, inning, 9));
