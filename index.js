@@ -110,8 +110,8 @@ Use the getInningScore() function below to do the following:
 
 function getInningScore(inningCB) {
   return{
-    Home: inningCB(),
-    Away: inningCB()
+    Home: inning(),
+    Away: inning()
   }
 }
 
@@ -158,11 +158,23 @@ Use the scoreboard function below to do the following:
 ]  
   */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScoreCB, inningCB, inningNumber) {
+  let scores = [];
+  let home = 0;
+  let away = 0;
+  for (let i = 0; i < inningNumber; i++){
+    let inningScores= getInningScoreCB(inning());
+    home += inningScores.Home;
+    away += inningScores.Away;
+    scores.push(`Inning ${i + 1} : Away ${inningScores.Away} - Home ${inningScores.Home}`)
+  }
+  if (home === away){
+    scores.push(`This game will require extra innings: ${away} - ${home}`)
+  }
+  return 
 }
 
-
+console.log(scoreboard(getInningScore, inning, 9));
 
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
